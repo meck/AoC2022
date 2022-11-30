@@ -1,0 +1,105 @@
+cabal-version:   2.4
+name:            AoC
+version:         0.0.0
+license:         MIT
+license-file:    LICENSE
+copyright:       2022 Meck
+maintainer:      Johan@meck.se
+author:          Meck
+synopsis:        Solutions to advent of code 2022
+description:     Solutions to advent of code 2022
+build-type:      Simple
+extra-doc-files:
+  CHANGELOG.md
+  README.md
+
+common shared-properties
+  default-language: Haskell2010
+  build-depends:
+    , advent-of-code-api
+    , base
+
+  ghc-options:
+    -Wall -Wincomplete-uni-patterns -Wincomplete-record-updates
+    -Wcompat -Widentities -Wredundant-constraints -fhide-source-paths
+    -Wmissing-export-lists -Wpartial-fields
+
+library
+  import:          shared-properties
+  exposed-modules:
+    AoC
+    AoC.Api
+    Day1
+    Day10
+    Day11
+    Day12
+    Day13
+    Day14
+    Day15
+    Day16
+    Day17
+    Day18
+    Day19
+    Day2
+    Day20
+    Day21
+    Day22
+    Day23
+    Day24
+    Day25
+    Day3
+    Day4
+    Day5
+    Day6
+    Day7
+    Day8
+    Day9
+
+  other-modules:
+    AoC.Parsing
+    AoC.Queue
+    AoC.Util
+
+  hs-source-dirs:  src
+  build-depends:
+    , binary-strict
+    , bytestring
+    , containers
+    , deepseq
+    , directory
+    , gloss
+    , megaparsec
+    , monad-dijkstra
+    , mtl
+    , parser-combinators
+    , safe
+    , split
+    , text
+    , unordered-containers
+    , vector
+
+executable AoC
+  import:         shared-properties
+  main-is:        Main.hs
+  hs-source-dirs: app
+  build-depends:  AoC
+
+test-suite AoC-test
+  import:         shared-properties
+  type:           exitcode-stdio-1.0
+  main-is:        Spec.hs
+  hs-source-dirs: test
+  build-depends:
+    , AoC
+    , tasty
+    , tasty-hunit
+    , text
+
+benchmark AoC-benchmark
+  import:         shared-properties
+  type:           exitcode-stdio-1.0
+  main-is:        Main.hs
+  hs-source-dirs: benchmark
+  build-depends:
+    , AoC
+    , criterion
